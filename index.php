@@ -14,7 +14,7 @@ if($q->execute()) {
         $q = $db->prepare("SELECT * FROM appointment WHERE staff_id = ?");
         $q->bind_param("i",$staff_id);
         if($q && $q->execute()) {
-            $appointments - $q->get_result();
+            $appointments = $q->get_result();
             while($appointment = $appointments->fetch_assoc()) {
                 $appointmentId = $appointment['id'];
                 $appointmentDate = $appointment['date'];
