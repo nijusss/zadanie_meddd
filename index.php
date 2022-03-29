@@ -11,7 +11,7 @@ if($q->execute()) {
         $firstName = $row['firstName'];
         $lastName = $row['lastName'];
         echo "Lekarz $firstName $lastName:<br>";
-        $q = $db->prepare("SELECT * FROM schedule WHERE staff_id = ?");
+        $q = $db->prepare("SELECT * FROM appointment WHERE staff_id = ?");
         $q->bind_param("i",$staff_id);
         if($q && $q->execute()) {
             $appointments - $q->get_result();
