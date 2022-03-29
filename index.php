@@ -13,19 +13,23 @@ if($q->execute()) {
         echo "Lekarz $firstName $lastName:<br>";
         $q = $db->prepare("SELECT * FROM schedule WHERE staff_id = ?");
         $q->bind_param("i",$staff_id);
-        if($q->execute()) {
-            $schedule = $q->get_result();
-            while($visit = $schedule->fetch_assoc()) {
-                $timestamp = strtotime($visit['date']);
-                echo "<button style =\"margin:10px;\">";
-                echo date("j/m/Y H:i", $timestamp);
-                echo "</button>";
+        if($q && $q->execute()) {
+            $appointments - $q->get_result();
+            while($appointment = $appointments->fetch_assoc()) {
+                $appointmentId = $appointment['id'];
+                $appointmentDate = $appointment['date'];
+                $appointmentTimestamp = strtotime($appointmentDate);
+                echo "<a href=\"appointment.php?id=$appointmentId\" style=\"margin:10px; display:block\">";
+                echo date("j.m H:i", $appointmentTimestamp);
+                echo "</a>";
             }
+            echo "<br>";
+        } else {
+            die("Błąd pobierania wizyt z bazy danych");
         }
-        echo "<br>";
     }
 } else {
-    echo "Błąd podczas wyszukiwania w bazie danych";
+    die("Błąd pobierania lekarzy z bazy danych");
 }
 
 ?>
